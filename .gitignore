@@ -1,1 +1,10 @@
 node_modules
+
+## VS
+.vs/
+*.suo
+slnx.sqlite
+.vs/machielvisser.github.io/v15/.suo
+.vs/slnx.sqlite
+.vs/machielvisser.github.io/v15/.suo
+*.sqlite
