@@ -75,3 +75,15 @@ img::-moz-selection {
   color: $white;
   background: transparent;
 }
+
+section {
+    padding-bottom: 50px;
+}
+
+.text-third {
+    color: $palette3;
+}
+
+.text-fourth {
+    color: $palette4;
+}
