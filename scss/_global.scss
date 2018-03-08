@@ -75,3 +75,39 @@ img::-moz-selection {
   color: $white;
   background: transparent;
 }
+
+section {
+    padding-bottom: 50px;
+}
+
+.bg-palette1 {
+    background-color: $palette1;
+}
+
+.bg-palette2 {
+    background-color: $palette2;
+}
+
+.bg-palette3 {
+    background-color: $palette3;
+}
+
+.bg-palette4 {
+    background-color: $palette4;
+}
+
+.text-palette1 {
+    color: $palette1;
+}
+
+.text-palette2 {
+    color: $palette2;
+}
+
+.text-palette3 {
+    color: $palette3;
+}
+
+.text-palette4 {
+    color: $palette4;
+}
