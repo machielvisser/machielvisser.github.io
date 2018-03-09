@@ -56,4 +56,6 @@
   // Collapse the navbar when page is scrolled
   $(window).scroll(navbarCollapse);
 
+  document.getElementById('copyright').innerHTML = 'Copyright &copy; Machiel Visser ' + new Date().getFullYear();
+
 })(jQuery); // End of use strict
