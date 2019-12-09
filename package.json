@@ -1,8 +1,7 @@
 {
-  "title": "Clean Blog",
-  "name": "startbootstrap-clean-blog",
-  "version": "4.0.0",
-  "description": "Clean Blog is a Medium inspired blog theme for Bootstrap.",
+  "title": "Website Machiel Visser",
+  "name": "website-machiel-visser",
+  "version": "1.0.1",
   "keywords": [
     "css",
     "sass",
@@ -11,19 +10,14 @@
     "theme",
     "template"
   ],
-  "homepage": "https://startbootstrap.com/template-overviews/clean-blog",
-  "bugs": {
-    "url": "https://github.com/BlackrockDigital/startbootstrap-clean-blog/issues",
-    "email": "feedback@startbootstrap.com"
-  },
+  "homepage": "https://machielvisser.com",
   "license": "MIT",
-  "author": "Start Bootstrap",
+  "author": "Machiel Visser",
   "contributors": [
-    "David Miller (http://davidmiller.io/)"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/BlackrockDigital/startbootstrap-clean-blog.git"
+    "url": "https://github.com/machielvisser/machielvisser.github.io.git"
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
