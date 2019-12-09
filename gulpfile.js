@@ -34,6 +34,18 @@ gulp.task('vendor', function(done) {
       '!./node_modules/jquery/dist/core.js'
     ])
     .pipe(gulp.dest('./vendor/jquery'))
+    
+    // jQuery.easing
+    gulp.src([
+        './node_modules/jquery.easing/jquery.easing.min.js'
+    ])
+        .pipe(gulp.dest('./vendor/jquery-easing'))
+
+    // scrollreveal
+    gulp.src([
+        './node_modules/scrollreveal/dist/scrollreveal.min.js'
+    ])
+        .pipe(gulp.dest('./vendor/scrollreveal'))
 
     done();
 });
@@ -94,7 +106,7 @@ gulp.task('browserSync', function() {
 });
 
 // Dev task
-gulp.task('dev', gulp.series('css', 'js', 'browserSync'), function() {
+gulp.task('dev', gulp.series('css', 'js', 'vendor', 'browserSync'), function() {
   gulp.watch('./scss/*.scss', ['css']);
   gulp.watch('./js/*.js', ['js']);
   gulp.watch('./*.html', browserSync.reload);

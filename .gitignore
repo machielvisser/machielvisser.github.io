@@ -1,6 +1,9 @@
-## Node
-node_modules
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
 
-## VS
-.vs
+/.vs
+/node_modules/.bin/atob
+/node_modules
 /vendor
+/css/lora.min.css
