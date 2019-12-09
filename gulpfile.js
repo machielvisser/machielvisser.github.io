@@ -37,13 +37,13 @@ gulp.task('vendor', function(done) {
     
     // jQuery.easing
     gulp.src([
-        './node_modules/jquery.easing/jquery.easing.min.js'
+        './node_modules/jquery.easing/*.js'
     ])
         .pipe(gulp.dest('./vendor/jquery-easing'))
 
     // scrollreveal
     gulp.src([
-        './node_modules/scrollreveal/dist/scrollreveal.min.js'
+        './node_modules/scrollreveal/dist/*'
     ])
         .pipe(gulp.dest('./vendor/scrollreveal'))
 

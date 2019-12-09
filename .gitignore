@@ -5,5 +5,3 @@
 /.vs
 /node_modules/.bin/atob
 /node_modules
-/vendor
-/css/lora.min.css
