@@ -18,6 +18,7 @@ $(function () {
       event.preventDefault(); // prevent default submit behaviour
 
       // get values from FORM
+      var appid = $("input#appid").val();
       var name = $("input#name").val();
       var email = $("input#email").val();
       var message = $("textarea#message").val();
@@ -34,10 +35,11 @@ $(function () {
       $.ajax({
         url: "https://websitefunctions.azurewebsites.net/api/contactformemail",
         type: "POST",
-        data: JSON.stringify({
-          name: name,
-          email: email,
-          message: message
+          data: JSON.stringify({
+            appid: appid,
+            name: name,
+            email: email,
+            message: message
         }),
         cache: false,
         success: function() {
