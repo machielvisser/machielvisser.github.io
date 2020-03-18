@@ -21,7 +21,7 @@ stages:
   pool: 
     vmImage: 'ubuntu-latest'
   jobs:
-  - job: Build
+  - job: ProductionBuild
     steps:
 
     - script: |
@@ -47,7 +47,8 @@ stages:
         ArtifactName: 'build-output' 
 
   - job: Deploy
-    condition: succeeded()
+    dependsOn: ProductionBuild
+    condition: in(dependencies.ProductionBuild.result, 'Succeeded')
     displayName: Deploy to release branch
     pool: 
       vmImage: 'ubuntu-latest'
