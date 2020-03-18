@@ -51,7 +51,7 @@ stages:
         ArtifactName: 'build-output' 
 
   - job: Deploy
-    condition: succeeded('Build')
+    condition: succeeded()
     displayName: Deploy to release branch
     pool: 
       vmImage: 'ubuntu-latest'
