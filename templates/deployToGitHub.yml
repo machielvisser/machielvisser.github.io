@@ -22,4 +22,4 @@ steps:
     Write-Host "Commit changes"
     git commit -m "Push build to master branch"
     Write-Host "Push the commit to origin"
-    git push "https://$(GitHub Pat):x-oauth-basic@github.com/machielvisser/machielvisser.github.io"
+    git push "https://:$(GitHub Pat)@github.com/machielvisser/machielvisser.github.io"
