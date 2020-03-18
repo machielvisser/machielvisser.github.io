@@ -1,17 +1,27 @@
 trigger:
 - master
 - develop
-- feature/*
-- release/*
 
 stages:
-- stage: Build
-  displayName: Production build    
+- stage: Acceptance
+  displayName: Acceptance stage
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
+  pool: 
+    vmImage: 'ubuntu-latest'
+  jobs:
+  - job: Build
+
+  - job: Deploy
+
+
+
+- stage: Production
+  displayName: Production stage
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
   pool: 
     vmImage: 'ubuntu-latest'
   jobs:
-  - job:
+  - job: Build
     steps:
     - task: NodeTool@0
       inputs:
@@ -40,13 +50,11 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)' 
         ArtifactName: 'build-output' 
 
-- stage: Deploy
-  condition: succeeded('Build')
-  displayName: Deploy to release branch
-  pool: 
-    vmImage: 'ubuntu-latest'
-  jobs:
-  - job:
+  - job: Deploy
+    condition: succeeded('Build')
+    displayName: Deploy to release branch
+    pool: 
+      vmImage: 'ubuntu-latest'
     steps:
     - task: DownloadBuildArtifacts@0
       inputs:
