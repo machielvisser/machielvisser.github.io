@@ -43,15 +43,16 @@ stages:
 
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-        ArtifactName: 'build-output' 
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'build-output'
 
   - deployment: Deploy
     dependsOn: ProductionBuild
     condition: in(dependencies.ProductionBuild.result, 'Succeeded')
     displayName: Deploy to release branch
     pool: 
-      vmImage: 'ubuntu-latest'    
+      vmImage: 'ubuntu-latest'
+    environment: 'github-pages'
     strategy:
       runOnce:
         deploy:
