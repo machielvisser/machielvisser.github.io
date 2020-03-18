@@ -2,6 +2,14 @@ trigger:
 - master
 - develop
 
+resources:
+  repositories:
+  - repository: github_pages
+    type: github
+    name: machielvisser/machielvisser.github.io
+    ref: refs/heads/release
+    endpoint: machielvisser
+
 stages:
 - stage: Acceptance
   displayName: Acceptance stage
@@ -58,15 +66,20 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              buildType: 'current'
-              artifactName: 'build-output'
-              downloadPath: '$(Build.ArtifactStagingDirectory)'
+          - checkout: github_pages
+            path: "$(Build.ArtifactStagingDirectory)"
 
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(Agent.BuildDirectory)'
+              Contents: '**'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)'
+              CleanTargetFolder: true
+            
           - powershell: |
               Write-Host "Adding artifact directory: $(Build.ArtifactStagingDirectory)"
               git add "$(Build.ArtifactStagingDirectory)"
+
               Write-Host "Set user.name to Pipeline"
               git config user.name "Pipeline"
               Write-Host "Commit changes"
