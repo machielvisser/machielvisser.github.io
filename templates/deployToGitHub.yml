@@ -1,0 +1,20 @@
+steps:
+- checkout: github_pages
+  path: "./target"
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Agent.BuildDirectory)/build-output'
+    Contents: '**'
+    TargetFolder: '$(Agent.BuildDirectory)/target'
+    CleanTargetFolder: true
+
+- powershell: |
+    Write-Host "Adding artifact directory: $(Agent.BuildDirectory)/target"
+    git add "$(Agent.BuildDirectory)/target"
+    Write-Host "Set user.name to Pipeline"
+    git config user.name "Pipeline"
+    Write-Host "Commit changes"
+    git commit -m "Push build to release branch"
+    Write-Host "Push the commit to origin release"
+    git push --set-upstream origin release
