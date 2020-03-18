@@ -41,10 +41,11 @@ stages:
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
         CleanTargetFolder: true
 
-    - task: PublishBuildArtifacts@1
+    - task: PublishPipelineArtifact@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'build-output'
+        targetPath: '$(Build.ArtifactStagingDirectory)'
+        artifact: 'build-output'
+        publishLocation: 'pipeline'
 
   - deployment: Deploy
     dependsOn: ProductionBuild
@@ -57,10 +58,9 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: DownloadBuildArtifacts@0
+          - task: DownloadPipelineArtifact@2
             inputs:
               buildType: 'current'
-              downloadType: 'single'
               artifactName: 'build-output'
               downloadPath: '$(Build.ArtifactStagingDirectory)'
 
