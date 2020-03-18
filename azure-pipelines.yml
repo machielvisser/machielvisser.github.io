@@ -64,9 +64,7 @@ stages:
         downloadPath: '$(System.ArtifactsDirectory)'
 
     - powershell: |
-        git branch release
-        git checkout release
         git add "$(System.ArtifactsDirectory)"
         git config user.name "Pipeline"
-        git commit -a -m "Push build to release branch"
-        git push
+        git commit -m "Push build to release branch"
+        git push --set-upstream origin release
