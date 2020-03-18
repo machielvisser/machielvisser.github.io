@@ -23,4 +23,4 @@ steps:
   inputs:
     command: 'publish'
     publishRegistry: 'useFeed'
-    publishFeed: '89c915ba-cfab-494e-a022-565f8e31d6eb'
+    publishFeed: 'machielvisser'
