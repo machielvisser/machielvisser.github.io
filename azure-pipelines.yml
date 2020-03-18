@@ -31,10 +31,10 @@ stages:
       - task: CopyFiles@2
         inputs:
           Contents: |
-            js\**
-            css\**
-            vendor\**
-            img\**
+            js/**
+            css/**
+            vendor/**
+            img/**
             favicon.ico
             index.html
           TargetFolder: '$(Build.ArtifactStagingDirectory)'
