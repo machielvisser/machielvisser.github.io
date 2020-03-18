@@ -5,22 +5,32 @@
 
 trigger:
 - master
+- develop
+- feature/*
+- release/*
 
-pool:
-  vmImage: 'ubuntu-latest'
+stages:
+  - stage: Build
+    displayName: Production build    
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+    pool: 
+      vmImage: 'ubuntu-latest'
+    jobs:
+    - job:
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install Node.js'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+      - script: |
+          npm install
+          gulp default --gulpfile gulpfile.js
+        displayName: 'npm install and run gulp'
+      - task: Npm@1
+        inputs:
+          command: 'publish'
+          publishRegistry: 'useFeed'
+          publishFeed: 'machielvisser'
 
-- script: |
-    npm install
-    gulp default --gulpfile gulpfile.js
-  displayName: 'npm install and run gulp'
-- task: Npm@1
-  inputs:
-    command: 'publish'
-    publishRegistry: 'useFeed'
-    publishFeed: 'machielvisser'
+
