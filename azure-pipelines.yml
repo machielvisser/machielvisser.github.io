@@ -31,8 +31,8 @@ stages:
       - task: CopyFiles@2
         inputs:
           Contents: |
-            js/**
-            css/**
+            js/*min*
+            css/*min*
             vendor/**
             img/**
             favicon.ico
