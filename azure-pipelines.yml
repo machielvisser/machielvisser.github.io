@@ -27,10 +27,21 @@ stages:
           npm install
           gulp default --gulpfile gulpfile.js
         displayName: 'npm install and run gulp'
-      - task: Npm@1
+
+      - task: CopyFiles@2
         inputs:
-          command: 'publish'
-          publishRegistry: 'useFeed'
-          publishFeed: 'machielvisser'
+          contents: |
+            js\*
+            css\*
+            vendor\*
+            img\*
+            favicon.ico
+            index.html
+          targetFolder: $(Build.ArtifactStagingDirectory)
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+          artifactName: 'build-output' 
 
 
