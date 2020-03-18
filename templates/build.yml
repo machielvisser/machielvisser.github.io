@@ -11,7 +11,9 @@ steps:
         vendor/**
         img/**
         favicon.ico
-        index.html
+        *.html
+        CNAME
+        LICENSE
       TargetFolder: '$(Build.ArtifactStagingDirectory)'
       CleanTargetFolder: true
 
