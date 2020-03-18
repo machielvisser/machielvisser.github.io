@@ -17,11 +17,22 @@ stages:
   pool: 
     vmImage: 'ubuntu-latest'
   jobs:
-  - job: Build
+  - job: TestBuild
+    steps:
+    - template: templates/build.yml
 
-  - job: Deploy
-
-
+  - deployment: TestDeployment
+    dependsOn: TestBuild
+    condition: in(dependencies.TestBuild.result, 'Succeeded')
+    displayName: Deploy the Test Infrastructure
+    pool: 
+      vmImage: 'ubuntu-latest'
+    environment: 'website-test-environment'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: templates/deployTestEnvironment.yml
 
 - stage: Production
   displayName: Production stage
@@ -31,31 +42,9 @@ stages:
   jobs:
   - job: ProductionBuild
     steps:
+    - template: templates/build.yml
 
-    - script: |
-        npm install
-        gulp default --gulpfile gulpfile.js
-      displayName: 'npm install and run gulp'
-
-    - task: CopyFiles@2
-      inputs:
-        Contents: |
-          js/*min*
-          css/*min*
-          vendor/**
-          img/**
-          favicon.ico
-          index.html
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
-        CleanTargetFolder: true
-
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)'
-        artifact: 'build-output'
-        publishLocation: 'pipeline'
-
-  - deployment: Deploy
+  - deployment: ProductionDeployment
     dependsOn: ProductionBuild
     condition: in(dependencies.ProductionBuild.result, 'Succeeded')
     displayName: Deploy to release branch
@@ -66,23 +55,4 @@ stages:
       runOnce:
         deploy:
           steps:
-          - checkout: github_pages
-            path: "./target"
-
-          - task: CopyFiles@2
-            inputs:
-              SourceFolder: '$(Agent.BuildDirectory)/build-output'
-              Contents: '**'
-              TargetFolder: '$(Agent.BuildDirectory)/target'
-              CleanTargetFolder: true
-            
-          - powershell: |
-              Write-Host "Adding artifact directory: $(Agent.BuildDirectory)/target"
-              git add "$(Agent.BuildDirectory)/target"
-
-              Write-Host "Set user.name to Pipeline"
-              git config user.name "Pipeline"
-              Write-Host "Commit changes"
-              git commit -m "Push build to release branch"
-              Write-Host "Push the commit to origin release"
-              git push --set-upstream origin release
+          - template: templates/deployToGitHub.yml
