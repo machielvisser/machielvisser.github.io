@@ -67,18 +67,18 @@ stages:
         deploy:
           steps:
           - checkout: github_pages
-            path: "$(Build.ArtifactStagingDirectory)"
+            path: "$(Build.ArtifactStagingDirectory)/master"
 
           - task: CopyFiles@2
             inputs:
-              SourceFolder: '$(Agent.BuildDirectory)'
+              SourceFolder: '$(Agent.BuildDirectory)/build-output'
               Contents: '**'
-              TargetFolder: '$(Build.ArtifactStagingDirectory)'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)/master'
               CleanTargetFolder: true
             
           - powershell: |
-              Write-Host "Adding artifact directory: $(Build.ArtifactStagingDirectory)"
-              git add "$(Build.ArtifactStagingDirectory)"
+              Write-Host "Adding artifact directory: $(Build.ArtifactStagingDirectory)/master"
+              git add "$(Build.ArtifactStagingDirectory)/master"
 
               Write-Host "Set user.name to Pipeline"
               git config user.name "Pipeline"
