@@ -11,9 +11,9 @@ resources:
     endpoint: machielvisser
 
 stages:
-- stage: Acceptance
-  displayName: Acceptance stage
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/feature/*')
+- stage: Test
+  displayName: Dev/Test stage
+  condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')
   pool: 
     vmImage: 'ubuntu-latest'
   jobs:
@@ -67,7 +67,7 @@ stages:
         deploy:
           steps:
           - checkout: github_pages
-            path: "$(Build.ArtifactStagingDirectory)/master"
+            path: "./master"
 
           - task: CopyFiles@2
             inputs:
