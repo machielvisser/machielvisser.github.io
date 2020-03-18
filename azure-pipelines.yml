@@ -1,8 +1,3 @@
-# Node.js with gulp
-# Build a Node.js project using the gulp task runner.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - master
 - develop
@@ -10,39 +5,60 @@ trigger:
 - release/*
 
 stages:
-  - stage: Build
-    displayName: Production build    
-    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-    pool: 
-      vmImage: 'ubuntu-latest'
-    jobs:
-    - job:
-      steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '10.x'
-        displayName: 'Install Node.js'
+- stage: Build
+  displayName: Production build    
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+  pool: 
+    vmImage: 'ubuntu-latest'
+  jobs:
+  - job:
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
 
-      - script: |
-          npm install
-          gulp default --gulpfile gulpfile.js
-        displayName: 'npm install and run gulp'
+    - script: |
+        npm install
+        gulp default --gulpfile gulpfile.js
+      displayName: 'npm install and run gulp'
 
-      - task: CopyFiles@2
-        inputs:
-          Contents: |
-            js/*min*
-            css/*min*
-            vendor/**
-            img/**
-            favicon.ico
-            index.html
-          TargetFolder: '$(Build.ArtifactStagingDirectory)'
-          CleanTargetFolder: true
+    - task: CopyFiles@2
+      inputs:
+        Contents: |
+          js/*min*
+          css/*min*
+          vendor/**
+          img/**
+          favicon.ico
+          index.html
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        CleanTargetFolder: true
 
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-          ArtifactName: 'build-output' 
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+        ArtifactName: 'build-output' 
 
+- stage: Deploy
+  condition: succeeded('Build')
+  displayName: Deploy to release branch
+  pool: 
+    vmImage: 'ubuntu-latest'
+  jobs:
+  - job:
+    steps:
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'build-output'
+        downloadPath: '$(System.ArtifactsDirectory)'
 
+    - powershell: |
+        git branch release
+        git checkout release
+        git add "$(System.ArtifactsDirectory)"
+        git config user.name "Pipeline"
+        git commit -a -m "Push build to release branch"
+        git push
