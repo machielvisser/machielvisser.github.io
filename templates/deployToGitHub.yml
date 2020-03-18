@@ -15,6 +15,8 @@ steps:
 
 - powershell: |
     git checkout master
+    Write-Host "Set user.name to Pipeline"	
+    git config user.name "Pipeline"
     Write-Host "Adding artifact directory: $(Agent.BuildDirectory)/target"
     git add "$(Agent.BuildDirectory)/target"
     Write-Host "Commit changes"
