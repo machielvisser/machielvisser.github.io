@@ -19,6 +19,6 @@ steps:
     Write-Host "Set user.name to Pipeline"
     git config user.name "Pipeline"
     Write-Host "Commit changes"
-    git commit -m "Push build to release branch"
-    Write-Host "Push the commit to origin release"
-    git push --set-upstream origin release
+    git commit -m "Push build to master branch"
+    Write-Host "Push the commit to origin"
+    git push
