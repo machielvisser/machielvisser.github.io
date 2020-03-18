@@ -22,4 +22,5 @@ steps:
     Write-Host "Commit changes"
     git commit -m "Push build to master branch"
     Write-Host "Push the commit to origin"
+    Write-Host "https://" + $env:GITHUB_PAT@github.com/machielvisser/machielvisser.github.io
     git push https://$env:GITHUB_PAT@github.com/machielvisser/machielvisser.github.io
