@@ -1,0 +1,22 @@
+steps:
+  - script: |
+      npm install
+      gulp default --gulpfile gulpfile.js
+    displayName: 'npm install and run gulp'
+  - task: CopyFiles@2
+    inputs:
+      Contents: |
+        js/*min*
+        css/*min*
+        vendor/**
+        img/**
+        favicon.ico
+        index.html
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      CleanTargetFolder: true
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)'
+      artifact: 'build-output'
+      publishLocation: 'pipeline'
