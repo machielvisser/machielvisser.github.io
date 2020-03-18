@@ -46,26 +46,29 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)' 
         ArtifactName: 'build-output' 
 
-  - job: Deploy
+  - deployment: Deploy
     dependsOn: ProductionBuild
     condition: in(dependencies.ProductionBuild.result, 'Succeeded')
     displayName: Deploy to release branch
     pool: 
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: DownloadBuildArtifacts@0
-      inputs:
-        buildType: 'current'
-        downloadType: 'single'
-        artifactName: 'build-output'
-        downloadPath: '$(System.ArtifactsDirectory)'
+      vmImage: 'ubuntu-latest'    
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'build-output'
+              downloadPath: '$(Build.ArtifactStagingDirectory)'
 
-    - powershell: |
-        Write-Host "Adding artifact directory: $(System.ArtifactsDirectory)"
-        git add "$(System.ArtifactsDirectory)"
-        Write-Host "Set user.name to Pipeline"
-        git config user.name "Pipeline"
-        Write-Host "Commit changes"
-        git commit -m "Push build to release branch"
-        Write-Host "Push the commit to origin release"
-        git push --set-upstream origin release
+          - powershell: |
+              Write-Host "Adding artifact directory: $(Build.ArtifactStagingDirectory)"
+              git add "$(Build.ArtifactStagingDirectory)"
+              Write-Host "Set user.name to Pipeline"
+              git config user.name "Pipeline"
+              Write-Host "Commit changes"
+              git commit -m "Push build to release branch"
+              Write-Host "Push the commit to origin release"
+              git push --set-upstream origin release
