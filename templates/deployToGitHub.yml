@@ -14,6 +14,7 @@ steps:
     TargetFolder: '$(Agent.BuildDirectory)/target'
 
 - powershell: |
+    git checkout master
     Write-Host "Adding artifact directory: $(Agent.BuildDirectory)/target"
     git add "$(Agent.BuildDirectory)/target"
     Write-Host "Set user.name to Pipeline"
