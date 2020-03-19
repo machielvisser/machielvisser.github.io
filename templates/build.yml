@@ -2,8 +2,9 @@ steps:
   - script: |
       npm install
       gulp default --gulpfile gulpfile.js
-    displayName: 'npm install and run gulp'
+    displayName: Build
   - task: CopyFiles@2
+    displayName: Copy to staging directory
     inputs:
       Contents: |
         js/*min*
@@ -19,6 +20,7 @@ steps:
       CleanTargetFolder: true
 
   - task: PublishPipelineArtifact@1
+    displayName: Publish pipeline artifacts
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)'
       artifact: 'build-output'
