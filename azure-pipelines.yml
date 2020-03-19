@@ -41,7 +41,7 @@ stages:
               resourceGroupName: 'Website'
               location: 'West Europe'
               templateLocation: 'Linked artifact'
-              csmFile: '$(Agent.BuildDirectory)/deployment/test-environment.json'
+              csmFile: '$(Agent.BuildDirectory)/build-output/deployment/test-environment.json'
               deploymentMode: 'Incremental'
           #- template: templates/deployTestEnvironment.yml
 
