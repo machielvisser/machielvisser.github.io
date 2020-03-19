@@ -43,6 +43,7 @@ stages:
               templateLocation: 'Linked artifact'
               csmFile: '$(Agent.BuildDirectory)/build-output/deployment/test-environment.json'
               deploymentMode: 'Incremental'
+              overrideParameters: '-StorageName mvwebsiteteststorage'
           #- template: templates/deployTestEnvironment.yml
 
 - stage: Production
