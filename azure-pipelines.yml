@@ -32,7 +32,18 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: templates/deployTestEnvironment.yml
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              deploymentScope: 'Resource Group'
+              azureResourceManagerConnection: 'Azure subscription'
+              subscriptionId: 'e748d334-1bb7-4234-aa25-7e8b114b9e0e'
+              action: 'Create Or Update Resource Group'
+              resourceGroupName: 'Website'
+              location: 'West Europe'
+              templateLocation: 'Linked artifact'
+              csmFile: 'deployment/test-environment.json'
+              deploymentMode: 'Incremental'
+          #- template: templates/deployTestEnvironment.yml
 
 - stage: Production
   displayName: Production stage
