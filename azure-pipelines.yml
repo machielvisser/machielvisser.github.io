@@ -48,7 +48,7 @@ stages:
           - task: AzureCLI@2
             inputs:
               azureSubscription: 'Azure subscription'
-              scriptType: 'pscore'
+              scriptType: 'ps'
               scriptLocation: 'inlineScript'
               inlineScript: |
                 $output=ConvertFrom-Json '$(deployment-output)'
