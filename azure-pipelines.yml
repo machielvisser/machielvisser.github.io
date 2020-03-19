@@ -43,6 +43,8 @@ stages:
   - job: ProductionBuild
     steps:
     - template: templates/build.yml
+    - task: PowerShell@2
+    - checkout: 
 
   - deployment: ProductionDeployment
     dependsOn: ProductionBuild
