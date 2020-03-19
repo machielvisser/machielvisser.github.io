@@ -15,7 +15,7 @@ steps:
     deploymentOutputs: 'deployment-output'
 #- template: templates/deployTestEnvironment.yml
 - task: AzureCLI@2
-  displayName: Enable static website
+  displayName: Upload website
   inputs:
     azureSubscription: 'Azure subscription'
     scriptType: 'pscore'
@@ -23,12 +23,4 @@ steps:
     inlineScript: |
       $output=ConvertFrom-Json '$(deployment-output)'
       az storage blob service-properties update --account-name $output.StorageName.value --static-website  --index-document index.html
-- task: AzureFileCopy@4
-  displayName: Deploy website to storageaccount
-  inputs:
-      SourcePath: '$(Agent.BuildDirectory)/build-output'
-      azureSubscription: 'Azure subscription'
-      Destination: 'AzureBlob'
-      storage: 'mvwebsiteteststorage'
-      ContainerName: '$web'
-      AdditionalArgumentsForBlobCopy: '--recursive=true'
+      az storage blob upload-batch --account-name $output.StorageName.value --destination ‘$web’ --source $(Agent.BuildDirectory)/build-output
