@@ -27,7 +27,7 @@
     "outputs": {
         "StorageName": {
             "type": "string",
-            "value": "[parameters('StorageName'))]"
+            "value": "[parameters('StorageName')]"
         }
     }
 }
