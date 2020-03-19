@@ -42,8 +42,9 @@ stages:
               location: 'West Europe'
               templateLocation: 'Linked artifact'
               csmFile: '$(Agent.BuildDirectory)/build-output/deployment/test-environment.json'
-              deploymentMode: 'Incremental'
               overrideParameters: '-StorageName mvwebsiteteststorage'
+              deploymentMode: 'Incremental'
+              deploymentOutputs: 'deployment-output'
           #- template: templates/deployTestEnvironment.yml
           - task: AzureCLI@2
             inputs:
