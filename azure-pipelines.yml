@@ -54,6 +54,13 @@ stages:
               inlineScript: |
                 $output=ConvertFrom-Json '$(deployment-output)'
                 az storage blob service-properties update --account-name $output.StorageName.value --static-website  --index-document index.html
+          - task: AzureFileCopy@4
+            inputs:
+                SourcePath: '$(Agent.BuildDirectory)/build-output'
+                azureSubscription: 'Azure subscription'
+                Destination: 'AzureBlob'
+                storage: 'mvwebsiteteststorage'
+                ContainerName: '$web'
 
 - stage: Production
   displayName: Production stage
