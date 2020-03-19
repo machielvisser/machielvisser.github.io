@@ -45,6 +45,14 @@ stages:
               deploymentMode: 'Incremental'
               overrideParameters: '-StorageName mvwebsiteteststorage'
           #- template: templates/deployTestEnvironment.yml
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'Azure subscription'
+              scriptType: 'pscore'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                $var=ConvertFrom-Json '$(storageAccountName)'
+                az storage blob service-properties update --account-name $var.storageAccountName.value --static-website  --index-document index.html
 
 - stage: Production
   displayName: Production stage
