@@ -51,7 +51,7 @@ stages:
               scriptType: 'pscore'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                $output=ConvertFrom-Json $deployment-output
+                $output=ConvertFrom-Json '($deployment-output)'
                 az storage blob service-properties update --account-name $output.StorageName.value --static-website  --index-document index.html
 
 - stage: Production
