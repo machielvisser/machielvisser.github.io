@@ -31,3 +31,4 @@ steps:
       Destination: 'AzureBlob'
       storage: 'mvwebsiteteststorage'
       ContainerName: '$web'
+      AdditionalArgumentsForBlobCopy: '--recursive=true'
