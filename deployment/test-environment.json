@@ -25,9 +25,9 @@
         }
     ],
     "outputs": {
-        "storageName": {
+        "StorageName": {
             "type": "string",
-            "value": "[resourceId('Microsoft.Storage/storageAccounts', parameters('name'))]"
+            "value": "[parameters('StorageName'))]"
         }
     }
 }
