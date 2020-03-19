@@ -4,7 +4,7 @@
     "parameters": {
         "StorageName": {
             "type":"string",
-            "defaultValue": "cloudenfrancaisv2",
+            "defaultValue": "website-test-storage",
             "maxLength": 24
         }
     },
