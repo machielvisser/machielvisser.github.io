@@ -37,11 +37,12 @@ $(function () {
       $.ajax({
         url: "https://mv-api-management.azure-api.net/website/ContactFormEmail",
         type: "POST",
-          data: JSON.stringify({
-            appid: appid,
-            name: name,
-            email: email,
-            message: message
+        contentType: "application/json",
+        data: JSON.stringify({
+          appid: appid,
+          name: name,
+          email: email,
+          message: message
         }),
         cache: false,
         success: function() {
