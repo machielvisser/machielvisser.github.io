@@ -26,24 +26,13 @@ stages:
     condition: in(dependencies.TestBuild.result, 'Succeeded')
     displayName: Deploy the Test Infrastructure
     pool: 
-      vmImage: 'ubuntu-latest'
+      vmImage: 'windows-2019'
     environment: 'website-test-environment'
     strategy:
       runOnce:
         deploy:
           steps:
-          - task: AzureResourceManagerTemplateDeployment@3
-            inputs:
-              deploymentScope: 'Resource Group'
-              azureResourceManagerConnection: 'Azure subscription'
-              subscriptionId: 'e748d334-1bb7-4234-aa25-7e8b114b9e0e'
-              action: 'Create Or Update Resource Group'
-              resourceGroupName: 'Website-Test'
-              location: 'West Europe'
-              templateLocation: 'Linked artifact'
-              csmFile: '$Agent.BuildDirectory)/deployment/test-environment.json'
-              deploymentMode: 'Incremental'
-          #- template: templates/deployTestEnvironment.yml
+          - template: templates/deployToStorageAccount.yml
 
 - stage: Production
   displayName: Production stage
