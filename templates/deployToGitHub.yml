@@ -7,8 +7,10 @@ steps:
 - task: DeleteFiles@1
   displayName: Remove old version
   inputs:
-    SourceFolder: '$(Agent.BuildDirectory)/target'
-    Contents: '!(*.git)'
+    SourceFolder: '$(Agent.BuildDirectory)'
+    Contents: |
+      target/**
+      !(.git/**)
 
 - task: CopyFiles@2
   displayName: Copy files to repo
