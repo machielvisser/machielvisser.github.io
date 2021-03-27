@@ -2,7 +2,6 @@ steps:
 - checkout: github_pages
   displayName: Checkout target
   path: "./target"
-  ref: github
   persistCredentials: true
   
 - task: DeleteFiles@1

@@ -8,6 +8,7 @@ resources:
     type: github
     name: machielvisser/machielvisser.github.io
     endpoint: machielvisser
+    ref: github
 
 stages:
 - stage: Test
