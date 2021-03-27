@@ -18,13 +18,13 @@ steps:
     TargetFolder: '$(Agent.BuildDirectory)/target'
 
 - powershell: |
-    git checkout master
+    git checkout github
     Write-Host "Set user.name to Pipeline"	
     git config user.name "Pipeline"
     Write-Host "Adding artifact directory: $(Agent.BuildDirectory)/target"
     git add "$(Agent.BuildDirectory)/target"
     Write-Host "Commit changes"
-    git commit -m "Push build to master branch"
+    git commit -m "Push build to github branch"
     Write-Host "Push the commit to origin"
     git push
   displayName: Commit and Push
