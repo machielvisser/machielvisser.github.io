@@ -28,5 +28,5 @@ steps:
     Write-Host "Commit changes"
     git commit -m "Push build to github branch"
     Write-Host "Push the commit to origin"
-    git push
+    git push origin HEAD:github
   displayName: Commit and Push
