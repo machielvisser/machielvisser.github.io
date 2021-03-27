@@ -1,13 +1,12 @@
 trigger:
 - feature/*
-- develop
+- master
 
 resources:
   repositories:
   - repository: github_pages
     type: github
     name: machielvisser/machielvisser.github.io
-    ref: refs/heads/master
     endpoint: machielvisser
 
 stages:
@@ -36,7 +35,7 @@ stages:
 
 - stage: Production
   displayName: Production stage
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
   pool: 
     vmImage: 'ubuntu-latest'
   jobs:
