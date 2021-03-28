@@ -1,7 +1,7 @@
 steps:
   - script: |
       npm install
-      gulp default --gulpfile gulpfile.js
+      npm run build
     displayName: Build
   - task: CopyFiles@2
     displayName: Copy to staging directory

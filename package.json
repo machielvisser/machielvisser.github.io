@@ -20,7 +20,8 @@
   },
   "scripts": {
     "lite": "lite-server",
-    "start": "npm run lite"
+    "start": "npm run lite",
+    "build": "gulp default --gulpfile gulpfile.js"
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
