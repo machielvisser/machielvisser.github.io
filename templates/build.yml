@@ -17,6 +17,7 @@ steps:
         CNAME
         LICENSE
         .well-known/**
+        _config.yml
       TargetFolder: '$(Build.ArtifactStagingDirectory)'
       CleanTargetFolder: true
 
