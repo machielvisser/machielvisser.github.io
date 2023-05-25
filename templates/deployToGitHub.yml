@@ -10,6 +10,7 @@ steps:
     SourceFolder: '$(Agent.BuildDirectory)'
     Contents: |
       target/**
+      deployment/**
       !(.git/**)
 
 - task: CopyFiles@2
