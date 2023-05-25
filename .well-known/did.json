@@ -1,1 +1,34 @@
-{"id":"did:web:did.machielvisser.com","@context":["https://www.w3.org/ns/did/v1",{"@base":"did:web:did.machielvisser.com"}],"service":[{"id":"#linkeddomains","type":"LinkedDomains","serviceEndpoint":{"origins":["https://did.machielvisser.com/"]}},{"id":"#hub","type":"IdentityHub","serviceEndpoint":{"instances":["https://hub.did.msidentity.com/v1.0/e5e8b983-2cca-4d31-97c0-e204b73376b7"]}}],"verificationMethod":[{"id":"#e9fd4ef41c464ebdb438744cf8fb9a93vcSigningKey-5545a","controller":"did:web:did.machielvisser.com","type":"EcdsaSecp256k1VerificationKey2019","publicKeyJwk":{"crv":"secp256k1","kty":"EC","x":"wYNulWaSMMHtoOQvKpzElAm8m6bGH33BJjjc1PThLqQ","y":"cMordgrnZNbjIN-TWMAtyV8y-5xPjBVT8gXlBXXXKZA"}}],"authentication":["#e9fd4ef41c464ebdb438744cf8fb9a93vcSigningKey-5545a"],"assertionMethod":["#e9fd4ef41c464ebdb438744cf8fb9a93vcSigningKey-5545a"]}
+{
+  "id": "did:web:machielvisser.com",
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    { "@base": "did:web:machielvisser.com" }
+  ],
+  "service": [
+    {
+      "id": "#linkeddomains",
+      "type": "LinkedDomains",
+      "serviceEndpoint": { "origins": [ "https://machielvisser.com/" ] }
+    },
+    {
+      "id": "#hub",
+      "type": "IdentityHub",
+      "serviceEndpoint": { "instances": [ "https://hub.did.msidentity.com/v1.0/e5e8b983-2cca-4d31-97c0-e204b73376b7" ] }
+    }
+  ],
+  "verificationMethod": [
+    {
+      "id": "#04082516720d4f3bb2f2cd0584d828f5vcSigningKey-2a3f9",
+      "controller": "did:web:machielvisser.com",
+      "type": "EcdsaSecp256k1VerificationKey2019",
+      "publicKeyJwk": {
+        "crv": "secp256k1",
+        "kty": "EC",
+        "x": "Q9RFUH8GX_tipPU8tSKKjw_Y_RuCvPf36qy9gK8iEtc",
+        "y": "u9ppdoFjrZ0hgE1SsRS9vKYjvxzjd0jSppjhT0oSQCQ"
+      }
+    }
+  ],
+  "authentication": [ "#04082516720d4f3bb2f2cd0584d828f5vcSigningKey-2a3f9" ],
+  "assertionMethod": [ "#04082516720d4f3bb2f2cd0584d828f5vcSigningKey-2a3f9" ]
+}
