@@ -12,6 +12,7 @@ steps:
       target/**
       deployment/**
       !(.git/**)
+      target/.well-known/**
 
 - task: CopyFiles@2
   displayName: Copy files to repo
