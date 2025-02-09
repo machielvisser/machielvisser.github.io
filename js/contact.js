@@ -17,8 +17,6 @@ $(function () {
     submitSuccess: function($form, event) {
       event.preventDefault(); // prevent default submit behaviour
 
-      grecaptcha.execute();
-
       // get values from FORM
       var appid = $("input#appid").val();
       var name = $("input#name").val();
