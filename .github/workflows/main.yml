@@ -50,3 +50,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.SCW_SECRET_ACCESS_KEY }}
           aws_bucket: 'machielvisser-nl'
           source_dir: 'public'
+          destination_dir: ''
