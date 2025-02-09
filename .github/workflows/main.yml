@@ -45,6 +45,7 @@ jobs:
           path: public
       - uses: shallwefootball/s3-upload-action@master
         with:
+          endpoint: 'https://s3.nl-ams.scw.cloud/'
           aws_key_id: ${{ secrets.SCW_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.SCW_SECRET_ACCESS_KEY }}
           aws_bucket: 'machielvisser-nl'
