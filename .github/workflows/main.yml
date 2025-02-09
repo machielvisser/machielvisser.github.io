@@ -43,12 +43,9 @@ jobs:
         with:
           name: build-output
           path: public
-      - name: setup hugo
-        uses: peaceiris/actions-hugo@v2.6.0
+      - uses: shallwefootball/s3-upload-action@master
         with:
-          hugo-version: '0.108.0'
-      - name: deploy to s3
-        run: hugo deploy --force --maxDeletes -1
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.SCW_SECRET_ACCESS_KEY }}
+          aws_key_id: ${{ secrets.SCW_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.SCW_SECRET_ACCESS_KEY }}
+          aws_bucket: 'machielvisser-nl'
+          source_dir: 'public'
