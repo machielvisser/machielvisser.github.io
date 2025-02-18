@@ -41,6 +41,7 @@ jobs:
           name: build-output
           path: ./target
       - name: Commit build
+        working-directory: ./target
         run: |
           git checkout github
           git config user.name "Pipeline"
