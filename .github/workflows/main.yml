@@ -43,8 +43,7 @@ jobs:
       - name: Commit build
         working-directory: ./target
         run: |
-          git checkout github
           git config user.name "Pipeline"
-          git add "./target"
+          git add "./"
           git commit -m "Push build to github branch"
           git push origin HEAD:github
