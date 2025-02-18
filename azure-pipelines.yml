@@ -11,29 +11,6 @@ resources:
     ref: github
 
 stages:
-- stage: Test
-  displayName: Test
-  condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')
-  pool: 
-    vmImage: 'ubuntu-latest'
-  jobs:
-  - job: TestBuild
-    steps:
-    - template: templates/build.yml
-
-  - deployment: TestDeployment
-    dependsOn: TestBuild
-    condition: in(dependencies.TestBuild.result, 'Succeeded')
-    displayName: Deploy the Test Infrastructure
-    pool: 
-      vmImage: 'windows-2019'
-    environment: 'website-test-environment'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - template: templates/deployToStorageAccount.yml
-
 - stage: Production
   displayName: Production
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
