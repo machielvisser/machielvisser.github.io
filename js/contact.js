@@ -17,31 +17,18 @@ $(function () {
     submitSuccess: function($form, event) {
       event.preventDefault(); // prevent default submit behaviour
 
-      // get values from FORM
-      var appid = $("input#appid").val();
-      var name = $("input#name").val();
-      var email = $("input#email").val();
-      var message = $("textarea#message").val();
-
-      var firstName = name; // For Success/Failure Message
-      // Check for white space in name for Success/Fail message
-      if (firstName.indexOf(' ') >= 0) {
-        firstName = name.split(' ').slice(0, -1).join(' ');
-      }
-
       $this = $("#sendMessageButton");
       $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
+        
+      var formData = new FormData(form);
+      var object = Object.fromEntries(formData);
+      var json = JSON.stringify(object);
 
       $.ajax({
-        url: "https://mv-api-management.azure-api.net/website/ContactFormEmail",
+        url: "https://api.web3forms.com/submit",
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({
-          appid: appid,
-          name: name,
-          email: email,
-          message: message
-        }),
+        data: json,
         cache: false,
         success: function() {
           // Success message
@@ -60,7 +47,7 @@ $(function () {
           $('#success').html("<div class='alert alert-danger'>");
           $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
             .append("</button>");
-          $('#success > .alert-danger').append($("<strong>").text("Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!"));
+          $('#success > .alert-danger').append($("<strong>").text("Sorry, it seems that my mail server is not responding. Please try again later!"));
           $('#success > .alert-danger').append('</div>');
         },
         complete: function() {
