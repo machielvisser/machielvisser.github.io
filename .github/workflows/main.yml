@@ -34,8 +34,8 @@ jobs:
           path: ./target
       - name: Removing unnecessary files
         run: |
-          rm -r target
-          rm -r deployment
+          rm -r target/*
+          rm -r deployment/*
       - uses: actions/download-artifact@v4
         with:
           name: build-output
