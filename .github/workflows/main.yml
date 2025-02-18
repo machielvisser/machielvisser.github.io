@@ -1,0 +1,49 @@
+name: Push commit
+on: push
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          npm install
+          npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: |
+            js/*min*
+            css/*min*
+            vendor/**
+            img/**
+            deployment/**
+            favicon.ico
+            *.html
+            CNAME
+            LICENSE
+            .well-known/**
+            _config.yml
+  production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 'github'
+          path: ./target
+      - name: Removing unnecessary files
+        run: |
+          rm -r target
+          rm -r deployment
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: ./target
+      - name: Commit build
+        run: |
+          git checkout github
+          git config user.name "Pipeline"
+          git add "./target"
+          git commit -m "Push build to github branch"
+          git push origin HEAD:github
