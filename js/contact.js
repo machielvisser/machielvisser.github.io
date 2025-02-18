@@ -20,16 +20,21 @@ $(function () {
       $this = $("#sendMessageButton");
       $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
         
-      const form = document.getElementById("contactForm");
-      const formData = new FormData(form);
-      const object = Object.fromEntries(formData);
-      const json = JSON.stringify(object);  
-
+      // get values from FORM
+      var name = $("input#name").val();
+      var email = $("input#email").val();
+      var message = $("textarea#message").val();
+        
       $.ajax({
         url: "https://api.web3forms.com/submit",
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        data: json,
+        data: JSON.stringify({
+          access_key: '819ced06-fc18-401e-9330-dedefdfe232d',
+          name: name,
+          email: email,
+          message: message
+        }),
         cache: false,
         success: function() {
           // Success message
