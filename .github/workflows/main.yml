@@ -41,7 +41,7 @@ jobs:
       - name: Commit build        
         working-directory: ./target
         run: |
-          pwd
+          stat ./js/contact.min.js
           git config user.name "Pipeline"
           git config user.email "dummy@domain.com"
           git branch -u origin/github
