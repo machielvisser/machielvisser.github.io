@@ -33,9 +33,6 @@ jobs:
         with:
           ref: 'github'
           path: ./target
-      - name: Removing unnecessary files
-        run: |
-          rm -r target/*
       - uses: actions/download-artifact@v4
         with:
           name: build-output
