@@ -47,6 +47,6 @@ jobs:
           pwd
           git config user.name "Pipeline"
           git config user.email "dummy@domain.com"
-          git add -all
+          git add --all
           git commit -m "Push build to github branch"
           git push origin HEAD:github
