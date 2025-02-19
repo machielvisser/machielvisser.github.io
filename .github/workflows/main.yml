@@ -39,12 +39,13 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: ./target
+          path: ./build-output        
+      - run: cp -r build-output/* target/
       - name: Commit build
         working-directory: ./target
         run: |
           git config user.name "Pipeline"
           git config user.email "dummy@domain.com"
-          git add *
+          git add -all
           git commit -m "Push build to github branch"
           git push origin HEAD:github
