@@ -33,7 +33,8 @@ $(function () {
           access_key: '819ced06-fc18-401e-9330-dedefdfe232d',
           name: name,
           email: email,
-          message: message
+          message: message,
+          test: null
         }),
         cache: false,
         success: function() {
