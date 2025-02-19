@@ -40,7 +40,7 @@ jobs:
         with:
           name: build-output
           path: ./build-output        
-      - run: cp -r build-output/* target/
+      - run: cp -v -r build-output/* target/
       - name: Commit build
         working-directory: ./target
         run: |
