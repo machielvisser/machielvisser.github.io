@@ -41,11 +41,12 @@ jobs:
           name: build-output
           path: ./build-output        
       - run: cp -v -r build-output/* target/
-      - name: Commit build
+      - name: Commit build        
+        working-directory: ./target
         run: |
           pwd
           git config user.name "Pipeline"
           git config user.email "dummy@domain.com"
-          git add ./target
+          git add ./
           git commit -m "Push build to github branch"
           git push origin github
