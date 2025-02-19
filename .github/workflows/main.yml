@@ -32,15 +32,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: 'github'
-          path: ./target
       - uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: ./build-output        
-      - run: cp -v -r build-output/* target/
+          path: ./     
       - name: Commit build        
-        working-directory: ./target
         run: |
+          date > generated.txt
           git status
           git config user.name "Pipeline"
           git config user.email "dummy@domain.com"
