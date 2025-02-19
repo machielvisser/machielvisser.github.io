@@ -41,10 +41,11 @@ jobs:
       - name: Commit build        
         working-directory: ./target
         run: |
-          stat ./js/contact.min.js
+          git status
           git config user.name "Pipeline"
           git config user.email "dummy@domain.com"
           git branch -u origin/github
           git add --all
+          git status
           git commit --allow-empty -m "Push build to github branch"
           git push origin HEAD:github
