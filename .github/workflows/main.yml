@@ -44,8 +44,7 @@ jobs:
           git status
           git config user.name "Pipeline"
           git config user.email "dummy@domain.com"
-          git branch -u origin/github
-          git add --all
+          git add .
           git status
           git commit --allow-empty -m "Push build to github branch"
           git push origin HEAD:github
